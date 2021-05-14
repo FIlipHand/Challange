@@ -1,0 +1,3 @@
+User bought 100.000000 DOGE at 0.527800
+User bought 100.000000 DOGE at 0.568800
+User sold 50.000000 DOGE at 0.602100
