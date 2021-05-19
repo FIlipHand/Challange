@@ -74,6 +74,7 @@ int main()
     main_army.units.push_back(s1);
     main_army.units.push_back(s2);
 
+    main_army.move(100, 20);
     main_army.attack();
 
     return 0;
