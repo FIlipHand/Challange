@@ -5,3 +5,4 @@ Singleton/main
 .vscode/settings.json
 AbstractFactory/main
 Prototype/main
+Composite/main
