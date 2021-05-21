@@ -70,7 +70,8 @@ int main()
 
     iter.next()->chronoboost();
     iter.next()->chronoboost();
-    iter.next()->chronoboost();
+    iter.next()->make_prob();
+
     cout << iter.hasNext() << '\n';
 
     return 0;
