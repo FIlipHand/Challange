@@ -17,7 +17,7 @@ public:
     }
 };
 
-class Proxy : public Object
+class Proxy : public IObject
 {
 private:
     Object *object;
