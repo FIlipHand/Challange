@@ -3,76 +3,80 @@
 
 using namespace std;
 
-class Nexus
-{
-public:
-    int energy;
-    void chronoboost()
-    {
-        if (energy < 50)
-        {
-            cout << "You require more energy.\n";
-        }
-        else
-        {
-            cout << "Used chronoboost.\n";
-            energy -= 50;
-        }
-    }
-    void make_prob()
-    {
-        cout << "Probe created.\n";
-    }
-};
-
 class Iterator
 {
 public:
-    virtual Nexus *next() = 0;
+    virtual int next() = 0;
     virtual bool hasNext() = 0;
 };
 
-class NexusIterator : public Iterator
+class Iterable
 {
 public:
-    Nexus *next()
-    {
-        ++cur_index;
-        return container[cur_index];
-    }
-    bool hasNext()
-    {
-        if (container.size() - 1 == cur_index)
-        {
-            return false;
-        }
-        return true;
-    }
-    vector<Nexus *> container;
+    virtual Iterator *getIterator() = 0;
+};
+
+class IntVector : public Iterable
+{
+public:
+    Iterator *getIterator();
+    vector<int> intvec;
+};
+
+class VecIterator : public Iterator
+{
+public:
+    VecIterator(IntVector *container);
+    IntVector *container;
+    int next();
+    bool hasNext();
 
 private:
-    int cur_index = -1;
+    int cur_index = 0;
 };
+
+Iterator *IntVector::getIterator()
+{
+    return new VecIterator(this);
+}
+
+int VecIterator::next()
+{
+    if (this->hasNext())
+    {
+        return this->container->intvec[this->cur_index++];
+    }
+    else
+    {
+        return -1;
+    }
+}
+
+bool VecIterator::hasNext()
+{
+    if (this->cur_index == this->container->intvec.size())
+        return false;
+    else
+        return true;
+}
+
+VecIterator::VecIterator(IntVector *container)
+{
+    this->container = container;
+}
 
 int main()
 {
-    Nexus *n1 = new Nexus();
-    n1->energy = 100;
-    Nexus *n2 = new Nexus();
-    n2->energy = 20;
-    Nexus *n3 = new Nexus();
-    n3->energy = 200;
+    IntVector vec;
+    vec.intvec.push_back(1);
+    vec.intvec.push_back(4);
+    vec.intvec.push_back(2);
 
-    NexusIterator iter;
-    iter.container.push_back(n1);
-    iter.container.push_back(n2);
-    iter.container.push_back(n3);
-
-    iter.next()->chronoboost();
-    iter.next()->chronoboost();
-    iter.next()->make_prob();
-
-    cout << iter.hasNext() << '\n';
+    Iterator *iter = vec.getIterator();
+    while (iter->hasNext())
+    {
+        cout << iter->next() << '\n';
+    }
 
     return 0;
 }
