@@ -7,34 +7,44 @@ using namespace std;
 class Sorting
 {
 public:
-    virtual int compare(const void *a, const void *b) = 0;
+    virtual int compare(int a, int b) = 0;
     void _sort(vector<int> &v)
     {
-        sort(v.begin(), v.end(), compare);
+        int i, j, min_idx;
+
+        for (i = 0; i < v.size() - 1; i++)
+        {
+            min_idx = i;
+            for (j = i + 1; j < v.size(); j++)
+                if (compare(v[j], v[min_idx]))
+                    min_idx = j;
+
+            swap(v[min_idx], v[i]);
+        }
     }
 };
 
 class AscendSort : public Sorting
 {
 public:
-    int compare(void *a, void *b)
+    int compare(int a, int b)
     {
-        return (*(const int *)b - *(const int *)a);
+        return b > a;
     }
 };
 
 class DescentSort : public Sorting
 {
 public:
-    int compare(const void *a, const void *b)
+    int compare(int a, int b)
     {
-        return (*(const int *)b - *(const int *)a);
+        return b < a;
     }
 };
 
 int main()
 {
-    DescentSort *sortowanko;
+    AscendSort *sortowanko = new AscendSort();
     vector<int> vec = {4, 5, 2, 5, 1, 6, 7, 2, 4, 6, 0};
     sortowanko->_sort(vec);
     for (int i = 0; i < vec.size(); ++i)
