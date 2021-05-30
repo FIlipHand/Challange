@@ -1,16 +1,3 @@
 **.uml
-Decorator/main
-Factory/main
-Singleton/main
 .vscode/settings.json
-AbstractFactory/main
-Prototype/main
-Composite/main
-Iterator/main
-Proxy/main
-Adapter/main
-Command/main
-Strategy/main
-Memento/main
-Template/main
-Mediator/main
+*/main
