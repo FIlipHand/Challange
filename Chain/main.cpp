@@ -14,8 +14,13 @@ class ifNieparzysta : public Warunek
 public:
     int handle(int n)
     {
-        cout << "if nieparzysta " << n - 1 << "\n";
-        return n - 1;
+        if (n % 2 == 1)
+        {
+            cout << "if nieparzysta " << n - 1 << "\n";
+            return n - 1;
+        }
+        else
+            return n;
     }
 };
 
@@ -24,8 +29,13 @@ class ifParzysta : public Warunek
 public:
     int handle(int n)
     {
-        cout << "if parzysta " << n + 1 << "\n";
-        return n + 1;
+        if (n % 2 == 0)
+        {
+            cout << "if parzysta " << n + 1 << "\n";
+            return n + 1;
+        }
+        else
+            return n;
     }
 };
 
