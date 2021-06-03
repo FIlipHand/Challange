@@ -49,14 +49,24 @@ public:
     }
 };
 
+class SuperPilot : public Pilot
+{
+public:
+    void mute()
+    {
+        this->tv->ustawGlosnosc(0);
+    }
+};
+
 int main()
 {
     Telewizor *p = new Plazma();
-    Pilot pilot;
+    SuperPilot pilot;
     pilot.tv = p;
     pilot.wlacz();
     pilot.zmienGlosnosc(10);
     pilot.zmienProgram(42);
+    pilot.mute();
 
     return 0;
 }
